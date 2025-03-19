@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gourmet Delights - Restaurant Menu</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="root">
+    <header>
+      <h1>Gourmet Delights</h1>
+      <nav class="filters">
+        <div class="diet-filters">
+          <input type="radio" name="diet" id="all" checked>
+          <label for="all">All Items</label>
+          
+          <input type="radio" name="diet" id="veg">
+          <label for="veg">Veg</label>
+          
+          <input type="radio" name="diet" id="non-veg">
+          <label for="non-veg">Non-Veg</label>
+          
+          <input type="radio" name="diet" id="egg">
+          <label for="non-veg">Egg</label>
+        </div>
+
+        <div class="category-filters">
+          <input type="radio" name="category" id="cat-all" checked>
+          <label for="cat-all">All Categories</label>
+          
+          <input type="radio" name="category" id="starters">
+          <label for="starters">Starters</label>
+          
+          <input type="radio" name="category" id="mains">
+          <label for="mains">Main Course</label>
+          
+          <input type="radio" name="category" id="desserts">
+          <label for="desserts">Desserts</label>
+        </div>
+      </nav>
+    </header>
+
+    <main class="menu-grid">
+      <!-- Starters Section -->
+      <section class="menu-section">
+        <h2 class="section-header">Starters</h2>
+        <div class="section-items">
+          <div class="menu-item veg starters">
+            <img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=400&h=300&fit=crop" alt="Bruschetta">
+            <div class="item-details">
+              <h3>Bruschetta <span class="veg-badge">V</span></h3>
+              <p>Toasted bread with tomatoes, garlic, and fresh basil</p>
+              <span class="price">$8.99</span>
+            </div>
+          </div>
+
+          <div class="menu-item non-veg starters">
+            <img src="https://images.unsplash.com/photo-1544510806-06d3dec08e22?w=400&h=300&fit=crop" alt="Chicken Wings">
+            <div class="item-details">
+              <h3>Spicy Chicken Wings <span class="non-veg-badge">NV</span></h3>
+              <p>Crispy wings tossed in our special hot sauce</p>
+              <span class="price">$12.99</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Course Section -->
+      <section class="menu-section">
+        <h2 class="section-header">Main Course</h2>
+        <div class="section-items">
+          <div class="menu-item veg mains">
+            <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=400&h=300&fit=crop" alt="Margherita Pizza">
+            <div class="item-details">
+              <h3>Margherita Pizza <span class="veg-badge">V</span></h3>
+              <p>Fresh tomatoes, mozzarella, basil, olive oil</p>
+              <span class="price">$14.99</span>
+            </div>
+          </div>
+
+          <div class="menu-item non-veg mains">
+            <img src="https://images.unsplash.com/photo-1485921325833-c519f76c4927?w=400&h=300&fit=crop" alt="Grilled Salmon">
+            <div class="item-details">
+              <h3>Grilled Salmon <span class="non-veg-badge">NV</span></h3>
+              <p>Fresh Atlantic salmon with lemon herb butter</p>
+              <span class="price">$24.99</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Desserts Section -->
+      <section class="menu-section">
+        <h2 class="section-header">Desserts</h2>
+        <div class="section-items">
+          <div class="menu-item veg desserts">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=300&fit=crop" alt="Chocolate Cake">
+            <div class="item-details">
+              <h3>Chocolate Cake <span class="veg-badge">V</span></h3>
+              <p>Rich chocolate layer cake with ganache</p>
+              <span class="price">$7.99</span>
+            </div>
+          </div>
+
+          <div class="menu-item veg desserts">
+            <img src="https://images.unsplash.com/photo-1570476922354-81227cdbb76c?w=400&h=300&fit=crop" alt="Tiramisu">
+            <div class="item-details">
+              <h3>Tiramisu <span class="veg-badge">V</span></h3>
+              <p>Classic Italian coffee-flavored dessert</p>
+              <span class="price">$8.99</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
