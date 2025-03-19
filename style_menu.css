@@ -1,0 +1,186 @@
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  /* width: 100%; */
+  top: 0;
+  z-index: 1000;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  line-height: 1.6;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  font-family: "Chelsea Market", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 32px;
+  /* padding: 8px 64px; */
+  color: #1a4067;
+}
+
+.tab_buttons {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  /* padding: 8px 64px; */
+  color: #000000;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff664f;
+}
+
+.hero-content {
+  padding: 32px;
+}
+
+.hero h1 {
+  font-family: "Chelsea Market", system-ui;
+  font-size: 56px;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 32px;
+}
+
+.hero3 {
+  height: 40vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)),
+    url("Assets/menu2_bg.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: auto;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin: 0;
+}
+
+main {
+  margin-top: 2rem;
+  padding: 2rem 5%;
+}
+
+section {
+  margin-bottom: 4rem;
+}
+
+h2 {
+  font-family: "Chelsea Market", system-ui;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+h3 {
+  font-family: "Chelsea Market", system-ui;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.about {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+footer {
+  background-color: #042c44;
+  color: white;
+  padding: 48px 0px;
+  margin: 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: grid;
+  padding-left: 120px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.footer-section h3 {
+  font-family: "Chelsea Market", system-ui;
+  margin-bottom: 16px;
+}
+
+.social-links {
+  display: flex;
+  gap: 16px;
+}
+
+.social-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 32px;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+body {
+  background : linear-gradient(#00000027, #000000a5), url("Assets/menu3_bg.jpg");
+  background-position: center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  width:auto;  
+  margin: 0;
+  padding:0;
+}
+.menu-container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+  margin-bottom: 20px;
+}
+.menu-item {
+  display: flex;
+  padding: 5px 0;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.half_price { 
+}
