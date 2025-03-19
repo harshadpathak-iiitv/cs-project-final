@@ -1,0 +1,213 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Header styles */
+header {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+h1 {
+  text-align: center;
+  color: #e65100;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Filter styles */
+.filters {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.diet-filters,
+.category-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #f0f0f0;
+}
+
+label:hover {
+  background-color: #e0e0e0;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #e65100;
+  color: white;
+}
+
+/* Menu grid styles */
+.menu-grid {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Section headers */
+.menu-section {
+  margin: 3rem 0;
+}
+
+.section-header {
+  color: #e65100;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.section-header::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #e65100;
+  margin: 0.5rem auto;
+}
+
+.section-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* Menu item styles */
+.menu-item {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.menu-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.item-details {
+  padding: 1.5rem;
+}
+
+.item-details h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-details p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-weight: bold;
+  color: #e65100;
+  font-size: 1.25rem;
+}
+
+/* Badge styles */
+.veg-badge,
+.non-veg-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+}
+
+.veg-badge {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.non-veg-badge {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* Filter functionality */
+/* Hide all items by default when a filter is selected */
+#veg:checked ~ .menu-grid .menu-item,
+#non-veg:checked ~ .menu-grid .menu-item,
+#starters:checked ~ .menu-grid .menu-item,
+#mains:checked ~ .menu-grid .menu-item,
+#desserts:checked ~ .menu-grid .menu-item {
+  display: none;
+}
+
+/* Show items based on diet selection */
+#veg:checked ~ .menu-grid .veg,
+#non-veg:checked ~ .menu-grid .non-veg,
+#all:checked ~ .menu-grid .menu-item {
+  display: block;
+}
+
+/* Show items based on category selection */
+#starters:checked ~ .menu-grid .starters,
+#mains:checked ~ .menu-grid .mains,
+#desserts:checked ~ .menu-grid .desserts,
+#cat-all:checked ~ .menu-grid .menu-item {
+  display: block;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .section-items {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  header {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .section-header {
+    font-size: 1.75rem;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

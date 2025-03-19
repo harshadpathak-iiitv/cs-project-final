@@ -152,7 +152,7 @@ footer {
 }
 
 body {
-  background : linear-gradient(#00000027, #000000a5), url("Assets/menu3_bg.jpg");
+  background-color: white ;
   background-position: center;
   background-repeat:no-repeat;
   background-size:cover;
