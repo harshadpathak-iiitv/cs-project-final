@@ -38,7 +38,7 @@
     
     <header class="hero2">
       <div class="hero2-content">
-        <h1>Dine with us</h1>
+        <h1>Dine in with us</h1>
         <p>A varaiety of mouthwatering dishes</p>
       </div>
     </header>
@@ -72,9 +72,9 @@
 
         <div align="center" class="meal-selection">
           <p>Meal:</p>
-          <input type="radio" id="breakfast" name="part_of_day" value="Breakfast" required>Breakfast
-          <input type="radio" id="lunch" name="part_of_day" value="Lunch" required>Lunch
-          <input type="radio" id="dinner" name="part_of_day" value="Dinner" required>Dinner
+          <input type="radio" id="breakfast" name="selectedmeal" value="Breakfast" required>Breakfast
+          <input type="radio" id="lunch" name="selectedmeal" value="Lunch" required>Lunch
+          <input type="radio" id="dinner" name="selectedmeal" value="Dinner" required>Dinner
       
           <div class="options options-breakfast">
               <input type="radio" name="time" value="7 AM"> 7 AM
@@ -96,7 +96,8 @@
         </div>
         <div align="center" class="contact_information">
           <p>Contact Information: </p>
-          
+          <p>Host Name: <input type="text" id="hostname" name="hostname" required><br></p>
+          <p>Enter Phone Number: <input type="tel" id="phone" name="phone_number" placeholder="1234567890" pattern="[0-9]{10}" required></p>
         </div>
         <div align="center">
           <button type="submit" class="submit-btn">Apply for Reservation</button>
@@ -128,7 +129,7 @@
   </body>
 </html>
 <script>
-  document.querySelectorAll('input[name="part_of_day"]').forEach(radio => {
+  document.querySelectorAll('input[name="selectedmeal"]').forEach(radio => {
     radio.addEventListener('change', function() {
         document.querySelectorAll('.options').forEach(option => option.style.display = 'none');
         if (this.checked) {
