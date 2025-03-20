@@ -39,43 +39,69 @@
     <header class="hero2">
       <div class="hero2-content">
         <h1>Dine with us</h1>
-        <p>A variety of mouthwatering dishes</p>
+        <p>A varaiety of mouthwatering dishes</p>
       </div>
     </header>
     <div class="reservation_container">
-      <form action="" class="reservation_form">
+      <form action="https://api.web3forms.com/submit" method="POST" class="reservation_form">
+        <input type="hidden" name="access_key" value="3bd2bf7f-fe2f-41c7-b193-2ef088983dc4">
         <p align="center">Select Number of Guests: 
-          <select id="no_of_guests" name="no_of_guests">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-          </select>
+            <select id="no_of_guests" name="no_of_guests">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+            </select>
         </p>
+
         <p align="center">Date for your Reservation:
-          <input type="date" id="date_of_reservation" name="date_of_reservation">
+            <input type="date" id="date_of_reservation" name="date_of_reservation" required>
         </p>
-        <p align="center">Meal:
-          <input type="radio" id="breakfast" name="part_of_day" value="Breakfast">
-          <label for="breakfast">Breakfast</label>
-          <input type="radio" id="lunch" name="part_of_day" value="Lunch">
-          <label for="lunch">Lunch</label>
-          <input type="radio" id="dinner" name="part_of_day" value="Dinner">
-          <label for="dinner">Dinner</label>
-        </p>
-      </form>
+
+        <div align="center" class="meal-selection">
+          <p>Meal:</p>
+          <input type="radio" id="breakfast" name="part_of_day" value="Breakfast" required>Breakfast
+          <input type="radio" id="lunch" name="part_of_day" value="Lunch" required>Lunch
+          <input type="radio" id="dinner" name="part_of_day" value="Dinner" required>Dinner
+      
+          <div class="options options-breakfast">
+              <input type="radio" name="time" value="7 AM"> 7 AM
+              <input type="radio" name="time" value="8 AM"> 8 AM
+              <input type="radio" name="time" value="9 AM"> 9 AM
+          </div>
+      
+          <div class="options options-lunch">
+              <input type="radio" name="time" value="12PM"> 12 PM
+              <input type="radio" name="time" value="1PM"> 1 PM
+              <input type="radio" name="time" value="2PM"> 2 PM
+          </div>
+      
+          <div class="options options-dinner">
+              <input type="radio" name="time" value="7PM"> 7 PM
+              <input type="radio" name="time" value="8PM"> 8 PM
+              <input type="radio" name="time" value="9PM"> 9 PM
+          </div>
+        </div>
+        <div align="center" class="contact_information">
+          <p>Contact Information: </p>
+          
+        </div>
+        <div align="center">
+          <button type="submit" class="submit-btn">Apply for Reservation</button>
+        </div>
+    </form>
     </div>
     <footer>
       <div class="footer-content">
@@ -101,3 +127,13 @@
     </footer>
   </body>
 </html>
+<script>
+  document.querySelectorAll('input[name="part_of_day"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        document.querySelectorAll('.options').forEach(option => option.style.display = 'none');
+        if (this.checked) {
+          document.querySelector(`.options-${this.id}`).style.display = 'block';
+        }
+    });
+  });
+</script>

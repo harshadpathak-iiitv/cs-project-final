@@ -120,3 +120,15 @@ footer {
   padding-top: 32px;
   border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
+
+.options {
+  display: none;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#breakfast:checked + .options-breakfast,
+#lunch:checked + .options-lunch,
+#dinner:checked + .options-dinner {
+  display: block;
+}
