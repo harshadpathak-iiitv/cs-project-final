@@ -71,7 +71,7 @@ nav a:hover {
 
 .hero2 {
   height: 60vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), url("Assets/contacts_bg.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), url("Assets/reservations_bg.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   width: auto;
