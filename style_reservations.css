@@ -71,7 +71,7 @@ nav a:hover {
 
 .hero2 {
   height: 60vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), url("Assets/reservations_bg.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), url("Assets/contacts_bg.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   width: auto;
@@ -131,4 +131,86 @@ footer {
 #lunch:checked + .options-lunch,
 #dinner:checked + .options-dinner {
   display: block;
+}
+
+.date_of_reservation {
+  width: 400px;
+  height: 50px;
+  border: none;
+  outline: none;
+  padding-left: 25px;
+  color: #1a4067;
+  
+  border-radius: 50px;
+  transition: all 0.15s ease;
+}
+
+.date_of_reservation:focus {
+  border: 2px solid #FF664F;
+}
+
+.date_of_reservation:hover {
+  border: 2px solid #FF664F;
+}
+
+.date_of_reservation::placeholder{
+  color: #FF664F;
+}
+
+.meal-selection {
+  width: 160px;
+  height: 20px;
+  border: none;
+  outline: none;
+  padding-left: 25px;
+  color: #1a4067;
+  
+  border-radius: 50px;
+  transition: all 0.15s ease;
+}
+
+.host_contact {
+  width: 400px;
+  height: 50px;
+  border: none;
+  outline: none;
+  padding-left: 25px;
+  color: #1a4067;
+  
+  border-radius: 50px;
+  transition: all 0.15s ease;
+}
+
+.host_contact:focus {
+  border: 2px solid #FF664F;
+}
+
+.host_contact:hover {
+  border: 2px solid #FF664F;
+}
+
+.host_contact::placeholder{
+  color: #FF664F;
+}
+
+.submit-btn button {
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  font-size: 16px;
+  color: white;
+  border: 1px solid #FF664F;
+  border-radius: 50px;
+  background: #FF664F;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.submit-btn button:hover{  padding: 15px 30px;
+  font-size: 16px;
+  padding: 20px 40px;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  background: #ff3718;
 }

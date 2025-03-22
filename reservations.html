@@ -67,40 +67,40 @@
         </p>
 
         <p align="center">Date for your Reservation:
-            <input type="date" id="date_of_reservation" name="Date_of_Reservation" required>
+            <input type="text" id="date_of_reservation" name="Date_of_Reservation" class="date_of_reservation" onfocus="(this.type='date')" onblur="(this.type='text')"placeholder="YYYY-MM-DD" required>
         </p>
 
-        <div align="center" class="meal-selection">
+        <div align="center" class="meal-time-selection">
           <p>Meal:</p>
-          <input type="radio" id="breakfast" name="selectedmeal" value="Breakfast" required>Breakfast
-          <input type="radio" id="lunch" name="selectedmeal" value="Lunch" required>Lunch
-          <input type="radio" id="dinner" name="selectedmeal" value="Dinner" required>Dinner
+          <input type="radio" id="breakfast" name="selectedmeal" value="Breakfast" class="meal-selection" required>Breakfast
+          <input type="radio" id="lunch" name="selectedmeal" value="Lunch" class="meal-selection" required>Lunch
+          <input type="radio" id="dinner" name="selectedmeal" value="Dinner" class="meal-selection" required>Dinner
       
           <div class="options options-breakfast">
-              <input type="radio" id="time" name="Time" value="7 AM"> 7 AM
-              <input type="radio" id="time" name="Time" value="8 AM"> 8 AM
-              <input type="radio" id="time" name="Time" value="9 AM"> 9 AM
+              <input type="radio" id="time" name="Time" value="7 AM" class="meal-selection"> 7 AM
+              <input type="radio" id="time" name="Time" value="8 AM" class="meal-selection"> 8 AM
+              <input type="radio" id="time" name="Time" value="9 AM" class="meal-selection"> 9 AM
           </div>
       
           <div class="options options-lunch">
-              <input type="radio" id="time" name="Time" value="12PM"> 12 PM
-              <input type="radio" id="time" name="Time" value="1PM"> 1 PM
-              <input type="radio" id="time" name="Time" value="2PM"> 2 PM
+              <input type="radio" id="time" name="Time" value="12PM" class="meal-selection"> 12 PM
+              <input type="radio" id="time" name="Time" value="1PM" class="meal-selection"> 1 PM
+              <input type="radio" id="time" name="Time" value="2PM" class="meal-selection"> 2 PM
           </div>
       
           <div class="options options-dinner">
-              <input type="radio" id="time" name="Time" value="7PM"> 7 PM
-              <input type="radio" id="time" name="Time" value="8PM"> 8 PM
-              <input type="radio" id="time" name="Time" value="9PM"> 9 PM
+              <input type="radio" id="time" name="Time" value="7PM" class="meal-selection"> 7 PM
+              <input type="radio" id="time" name="Time" value="8PM" class="meal-selection"> 8 PM
+              <input type="radio" id="time" name="Time" value="9PM" class="meal-selection"> 9 PM
           </div>
         </div>
         <div align="center" class="contact_information">
           <p>Contact Information: </p>
-          <p>Host Name: <input type="text" id="hostname" name="Host_Name" required><br></p>
-          <p>Enter Phone Number: <input type="tel" id="phone" name="Phone_Number" placeholder="1234567890" pattern="[0-9]{10}" required></p>
+          <p>Host Name: <input type="text" id="hostname" name="Host_Name" class="host_contact" placeholder="John Doe"><br></p>
+          <p>Contact Phone Number: <input type="tel" id="phone" name="Phone_Number" class="host_contact" placeholder="1234567890" pattern="[0-9]{10}" required></p>
         </div>
-        <div align="center">
-          <button type="submit" class="submit-btn">Apply for Reservation</button>
+        <div align="center" class="submit-btn">
+          <button type="submit">Apply for Reservation</button>
         </div>
     </form>
     </div>
