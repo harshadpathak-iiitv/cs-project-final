@@ -157,6 +157,30 @@ footer {
   color: #FF664F;
 }
 
+.no_of_guests {
+  width: 400px;
+  height: 50px;
+  border: none;
+  outline: none;
+  padding-left: 25px;
+  color: #1a4067;
+  
+  border-radius: 50px;
+  transition: all 0.15s ease;
+}
+
+.no_of_guests:focus {
+  border: 2px solid #FF664F;
+}
+
+.no_of_guests:hover {
+  border: 2px solid #FF664F;
+}
+
+.no_of_guests::placeholder{
+  color: #FF664F;
+}
+
 .meal-selection {
   width: 160px;
   height: 20px;

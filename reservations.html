@@ -46,7 +46,7 @@
       <form action="https://api.web3forms.com/submit" method="POST" class="reservation_form">
         <input type="hidden" name="access_key" value="3bd2bf7f-fe2f-41c7-b193-2ef088983dc4">
         <p align="center">Select Number of Guests: 
-            <select id="no_of_guests" name="Number_of_Guests">
+            <select id="no_of_guests" name="Number of Guests" class="no_of_guests" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -67,14 +67,14 @@
         </p>
 
         <p align="center">Date for your Reservation:
-            <input type="text" id="date_of_reservation" name="Date_of_Reservation" class="date_of_reservation" onfocus="(this.type='date')" onblur="(this.type='text')"placeholder="YYYY-MM-DD" required>
+            <input type="text" id="date_of_reservation" name="Date of Reservation" class="date_of_reservation" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="YYYY-MM-DD" required>
         </p>
 
         <div align="center" class="meal-time-selection">
           <p>Meal:</p>
-          <input type="radio" id="breakfast" name="selectedmeal" value="Breakfast" class="meal-selection" required>Breakfast
-          <input type="radio" id="lunch" name="selectedmeal" value="Lunch" class="meal-selection" required>Lunch
-          <input type="radio" id="dinner" name="selectedmeal" value="Dinner" class="meal-selection" required>Dinner
+          <input type="radio" id="breakfast" name="Selected Meal" value="Breakfast" class="meal-selection" required>Breakfast
+          <input type="radio" id="lunch" name="Selected Meal" value="Lunch" class="meal-selection" required>Lunch
+          <input type="radio" id="dinner" name="Selected Meal" value="Dinner" class="meal-selection" required>Dinner
       
           <div class="options options-breakfast">
               <input type="radio" id="time" name="Time" value="7 AM" class="meal-selection"> 7 AM
@@ -96,8 +96,8 @@
         </div>
         <div align="center" class="contact_information">
           <p>Contact Information: </p>
-          <p>Host Name: <input type="text" id="hostname" name="Host_Name" class="host_contact" placeholder="John Doe"><br></p>
-          <p>Contact Phone Number: <input type="tel" id="phone" name="Phone_Number" class="host_contact" placeholder="1234567890" pattern="[0-9]{10}" required></p>
+          <p>Host Name: <input type="text" id="hostname" name="Host Name" class="host_contact" placeholder="John Doe"><br></p>
+          <p>Contact Phone Number: <input type="tel" id="phone" name="Phone Number" class="host_contact" placeholder="1234567890" pattern="[0-9]{10}" required></p>
         </div>
         <div align="center" class="submit-btn">
           <button type="submit">Apply for Reservation</button>
@@ -129,7 +129,7 @@
   </body>
 </html>
 <script>
-  document.querySelectorAll('input[name="selectedmeal"]').forEach(radio => {
+  document.querySelectorAll('input[name="Selected Meal"]').forEach(radio => {
     radio.addEventListener('change', function() {
         document.querySelectorAll('.options').forEach(option => option.style.display = 'none');
         if (this.checked) {
