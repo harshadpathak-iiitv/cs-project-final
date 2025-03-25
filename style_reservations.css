@@ -70,7 +70,7 @@ nav a:hover {
 }
 
 .hero2 {
-  height: 60vh;
+  height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)), url("Assets/reservations_bg.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -130,11 +130,11 @@ footer {
 #breakfast:checked + .options-breakfast,
 #lunch:checked + .options-lunch,
 #dinner:checked + .options-dinner {
-  display: block;
+  display: flex ;
 }
 
 .date_of_reservation {
-  width: 400px;
+  width: 100px;
   height: 50px;
   border: none;
   outline: none;
@@ -158,7 +158,7 @@ footer {
 }
 
 .no_of_guests {
-  width: 400px;
+  width: 100px;
   height: 50px;
   border: none;
   outline: none;
@@ -182,7 +182,7 @@ footer {
 }
 
 .meal-selection {
-  width: 160px;
+  width: 80px;
   height: 20px;
   border: none;
   outline: none;
@@ -194,7 +194,7 @@ footer {
 }
 
 .host_contact {
-  width: 400px;
+  width: fit-content;
   height: 50px;
   border: none;
   outline: none;

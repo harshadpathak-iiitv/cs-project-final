@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 nav {
   display: flex;
   justify-content: space-around;
@@ -10,7 +16,7 @@ nav {
   top: 0;
   z-index: 1000;
 }
-
+/* 
 body {
   font-family: "Poppins", sans-serif;
   color: #333;
@@ -18,7 +24,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-}
+} */
 
 .logo {
   font-family: "Chelsea Market", system-ui;
@@ -54,6 +60,7 @@ nav a:hover {
   color: #ff664f;
 }
 
+
 .hero-content {
   padding: 32px;
 }
@@ -69,7 +76,7 @@ nav a:hover {
   margin-bottom: 32px;
 }
 
-.hero3 {
+.hero {
   height: 40vh;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1)),
     url("Assets/menu2_bg.jpg");
@@ -85,99 +92,199 @@ nav a:hover {
   margin: 0;
 }
 
-main {
-  margin-top: 2rem;
-  padding: 2rem 5%;
+body {
+  font-family: "Poppins", sans-serif;
+  background: #e7e7e797;
+  background-size: cover;
+  color: #105575;
+  line-height: 1.5;
 }
 
-section {
-  margin-bottom: 4rem;
-}
-
-h2 {
-  font-family: "Chelsea Market", system-ui;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-h3 {
-  font-family: "Chelsea Market", system-ui;
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.about {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
+.container {
+  min-height: 100vh;
 }
 
 footer {
-  background-color: #042c44;
-  color: white;
-  padding: 48px 0px;
-  margin: 0;
-  width: 100%;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 1rem;
+  position: relative;
 }
 
-.footer-content {
-  display: grid;
-  padding-left: 120px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 32px;
-  margin-bottom: 32px;
-}
-
-.footer-section h3 {
-  font-family: "Chelsea Market", system-ui;
-  margin-bottom: 16px;
-}
-
-.social-links {
+.header-content {
+  max-width: 1280px;
+  margin: 0 auto;
   display: flex;
-  gap: 16px;
-}
-
-.social-links a {
-  color: white;
-  text-decoration: none;
-}
-
-.footer-bottom {
-  text-align: center;
-  padding-top: 32px;
-  border-top: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-body {
-  background-color: white ;
-  background-position: center;
-  background-repeat:no-repeat;
-  background-size:cover;
-  width:auto;  
-  margin: 0;
-  padding:0;
-}
-.menu-container {
-  max-width: 800px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.section {
-  margin-bottom: 20px;
-}
-.menu-item {
-  display: flex;
-  padding: 5px 0;
   justify-content: space-between;
-  border-bottom: 1px solid #ddd;
+  align-items: center;
 }
-.menu-item:last-child {
-  border-bottom: none;
+
+
+.cart {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #dbeafe;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: #2563eb;
+}
+
+.cart svg {
+  color: #2563eb;
+}
+
+.cart .total {
+  font-weight: bold;
+}
+
+main {
+  max-width: 1280px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  
+  font-family: "Chelsea Market", system-ui;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #0b3568;
+}
+
+select {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: white;
+  min-width: 200px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #2563eb;
+  kerning: 2px solid #bfdbfe;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+/* 
+@media (min-width: 768px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .menu-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+} */
+
+.food-card {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  /* overflow: hidden; */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.food-card:hover {
+  background-color: #ffffff;
+  
+  /* color: #f3f4f6 */
+  
+  padding: 0.5rem 0.5rem;
+}
+
+.food-card img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.food-info {
+  padding: 1rem;
+}
+
+.food-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.food-header h3 {
+  
+  font-family: "Chelsea Market", system-ui;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.food-header img {
+  height: 24px;
+  width: 24px;
+}
+
+.food-info p {
+  color: #85a1c8;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+
+.food-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.add-to-cart {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #FF6868;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.add-to-cart:hover {
+  background-color: #f78c8c;
+  padding: 0.6rem 1.25rem;
+
+}
+
+
+.add-to-cart img {
+  height: 24px;
+  width: 24px;
 }
