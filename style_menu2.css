@@ -104,15 +104,17 @@ body {
   min-height: 100vh;
 }
 
-footer {
+.foot {
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 1.5rem 1rem;
-  position: relative;
+  /* position: fixed; */
+
 }
 
 .header-content {
   max-width: 1280px;
+  /* position: fixed; */
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
