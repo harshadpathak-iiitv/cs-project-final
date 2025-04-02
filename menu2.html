@@ -1154,10 +1154,11 @@
                         <p>Oven-roasted line-caught salmon with chervil and kumquat pesto</p>
                         <div class="food-footer">
                             <span class="price">$14.99</span>
-                            <button class="add-to-cart">
-                                <img src="Assets/plus-circle.svg" alt="plus">
-                                Add
-                            </button>
+                            <div class="cart-buttons" id="1" data-name="Coho Salmon" data-price="14.99">
+                                <button class="add-to-cart" onclick="addToCart('1')" >
+                                    <img src="Assets/plus-circle.svg" alt="plus"> Add
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1176,5 +1177,6 @@
                 </div>
             </div>
         </div>
+        <script src="cart.js"></script>
 </body>
 </html>
