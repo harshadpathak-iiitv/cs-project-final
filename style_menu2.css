@@ -104,15 +104,17 @@ body {
   min-height: 100vh;
 }
 
-footer {
+.foot {
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 1.5rem 1rem;
-  position: relative;
+  /* position: fixed; */
+
 }
 
 .header-content {
   max-width: 1280px;
+  /* position: fixed; */
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -283,8 +285,46 @@ select:focus {
 
 }
 
-
 .add-to-cart img {
   height: 24px;
   width: 24px;
+}
+
+.cart-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-buttons button:not(.add-to-cart) { 
+  background-color: #ff6868; 
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.cart-buttons button:not(.add-to-cart):hover {
+  background-color: #f78c8c; 
+  padding: 0.6rem 1.25rem;
+}
+
+.cart-buttons span {
+  font-size: 18px;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+}
+
+.delete-btn {
+  background-color: #ff6868; 
+  padding: 6px;
+}
+
+.delete-btn:hover {
+  background-color: #f78c8c;
+  padding: 0.6rem 1.25rem;
 }
