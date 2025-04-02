@@ -309,6 +309,7 @@ select:focus {
 
 .cart-buttons button:not(.add-to-cart):hover {
   background-color: #f78c8c; 
+  padding: 0.6rem 1.25rem;
 }
 
 .cart-buttons span {
@@ -325,4 +326,5 @@ select:focus {
 
 .delete-btn:hover {
   background-color: #f78c8c;
+  padding: 0.6rem 1.25rem;
 }
