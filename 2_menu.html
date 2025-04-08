@@ -37,13 +37,7 @@
         </li>
       </ul>
     </nav>
-
-    <main>
-      <div class="head">
-        <p class="head-text">Dine in with Us</p>
-        <p>A variety of Mouthwatering Dishes</p>
-      </div>
-    </main>
+    <main></main>
 
     <div id="data-container"></div>
 
@@ -57,6 +51,7 @@
       <p id="total">Total: ₹0</p>
     </div>
 
+    
     <div id="sidebar">
       <ul class="sidebar_ul">
         <li class="side-items">Pizza</li>
@@ -107,6 +102,7 @@
       async function smth() {
         const container = document.getElementById("data-container");
 
+
         let { data: some, error } = await supabaseClient
           .from("some")
           .select("*");
@@ -120,15 +116,11 @@
             const itemDiv = document.createElement("div");
             itemDiv.className = "food-card";
             itemDiv.innerHTML = `
-              <img class="food_image" src="${
-                item.Image || "https://via.placeholder.com/150"
-              }" alt="${item.Name || "Food Item"}" />
+              <img class="food_image" src="${item.Image || "https://via.placeholder.com/150"}" alt="${item.Name || "Food Item"}" />
               <div class="food-info">
                 <div class="food-header">
                   <h3>${item.Name || "Untitled"}</h3>
-                  <img class="food_badge" src="Assets/Icons/${
-                    item.Category === "Non-Veg" ? "nonveg.svg" : "veg.svg"
-                  }" alt="${item.Category}">
+                  <img class="food_badge" src="Assets/Icons/${item.Category === "Non-Veg" ? "nonveg.svg" : "veg.svg"}" alt="${item.Category}">
                 </div>
                 <p>${item.Description || "No description available."}</p>
                 <div class="food-footer">
@@ -150,6 +142,7 @@
             });
             container.appendChild(itemDiv);
           });
+
         }
       }
 
@@ -165,14 +158,14 @@
       } catch (e) {
         console.warn("Corrupted cart data, resetting.");
       }
-
+    
       function saveCart() {
         localStorage.setItem("cart", JSON.stringify(cart));
         renderCart();
       }
-
+    
       function addToCart(item) {
-        const existing = cart.find((i) => i.id === item.id);
+        const existing = cart.find(i => i.id === item.id);
         if (existing) {
           existing.quantity += 1;
         } else {
@@ -180,20 +173,16 @@
         }
         saveCart();
       }
-
+    
       function updateQuantity(id, delta) {
-        const item = cart.find((i) => i.id === id);
+        const item = cart.find(i => i.id === id);
         if (!item) return;
         item.quantity += delta;
         if (item.quantity <= 0) {
-          cart = cart.filter((i) => i.id !== id);
+          cart = cart.filter(i => i.id !== id);
         }
         saveCart();
       }
-<<<<<<< HEAD
-
-=======
->>>>>>> cf6cd09227675ca45b8ba9daa701810f3a53eecb
       function renderCart() {
         const container = document.getElementById("cart-items");
         const totalDisplay = document.getElementById("total");
@@ -208,54 +197,28 @@
           return;
         }
 
-<<<<<<< HEAD
-        cart.forEach((item) => {
-=======
         cart.forEach(item => {
->>>>>>> cf6cd09227675ca45b8ba9daa701810f3a53eecb
           const itemDiv = document.createElement("div");
           itemDiv.className = "cart-item";
           itemDiv.innerHTML = `
             <span>${item.Name}</span>
-            <div class="cost-butt">
             <span>₹${item.Cost} × ${item.quantity}</span>
-            <div>
             <button onclick="updateQuantity(${item.id}, -1)">-</button>
             <button onclick="updateQuantity(${item.id}, 1)">+</button>
-            </div>
-            </div>
           `;
           total += item.Cost * item.quantity;
           container.appendChild(itemDiv);
         });
 
-        totalDisplay.textContent = `Total: ₹${total}`;
+        totalDisplay.textContent = Total: ₹${total};
         toggleOrderNowBtn();
       }
-<<<<<<< HEAD
-      document
-        .getElementById("clear-cart-btn")
-        .addEventListener("click", function () {
-          localStorage.removeItem("cart");
-          cart = [];
-          updateCartDisplay();
-        });
-      document
-        .getElementById("clear-cart-btn")
-        .addEventListener("click", function () {
-          localStorage.removeItem("cart");
-          cart = [];
-          updateCartDisplay();
-        });
-      renderCart();
-=======
       document.getElementById("clear-cart-btn").addEventListener("click", function () {
         localStorage.removeItem("cart"); 
         cart = []; 
         updateCartDisplay(); 
       });
       renderCart(); 
->>>>>>> cf6cd09227675ca45b8ba9daa701810f3a53eecb
       function updateCartDisplay() {
         const cartItemsContainer = document.getElementById("cart-items");
         cartItemsContainer.innerHTML = "";
@@ -278,7 +241,7 @@
         const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
         const totalElement = document.getElementById("total");
         if (totalElement) {
-          totalElement.textContent = `Total: ₹${total}`;
+          totalElement.textContent = Total: ₹${total};
         }
       }
       function toggleOrderNowBtn() {
@@ -309,5 +272,6 @@
         renderCart();
       }
     </script>
+    
   </body>
 </html>
