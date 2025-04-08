@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <script src="4_contact.js"></script>
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -38,33 +39,34 @@
 
     <main>
       <div class="head">
-        <p class="head-text">Dine in with Us</p>
+        <p class="head-text">Contact Us</p>
         <p>A variety of Mouthwatering Dishes</p>
       </div>
     </main>
 
-    <main class="inp">
+    <form action="https://api.web3forms.com/submit" method="POST" class="inp">
+      </div>
+      <input type="hidden" name="access_key" value="dff60a8e-245c-4661-93c8-dacc58d2bafc">
       <div class="input-fields">
-        <p class="input-text" id="101">Number of Guests</p>
-          <input class="input" type="number" placeholder="Number of Guests" required>
+        <p class="input-text">Name</p>
+          <input id="106" class="input" type="text" placeholder="Name" name="Name" required>
       </div>
-      <div class="input-fields" id="102">
-        <p class="input-text">Date of reservation</p>
-          <input class="input" type="date" placeholder="DD-MM-YYYY" required>
-      </div>
-      <div class="input-fields" id="103">
-        <p class="input-text">Name of Reserver</p>
-          <input class="input" type="text" placeholder="Name" required>
-      </div>
-      <div class="input-fields" id="104">
+      <div class="input-fields">
         <p class="input-text">Phone Number</p>
-          <input class="input" type="text" placeholder="1234567890" required>
+          <input id="107" class="input" type="text" name="Phone Number" placeholder="1234567890" required>
       </div>
-      <div class="input-fields" id="105">
+      <div class="input-fields">
         <p class="input-text">Email</p>
-          <input class="input" type="email" placeholder="your_fav_GOURMET.DEV@dev.com" required>
+          <input id="108" class="input" type="email" name="Email" placeholder="your_fav_GOURMET.DEV@dev.com" required>
       </div>
-    </main>
+      <div class="input-fields">
+        <p class="input-text">Your Message</p>
+          <textarea id="109" class="input" type="textarea" name="Message from the User" placeholder="Convey your experience here" required></textarea>
+      </div>
+      <div class="submit-btn">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
 
     <main class="container5">
       <hr />
@@ -99,3 +101,4 @@
     </main>
   </body>
 </html>
+
