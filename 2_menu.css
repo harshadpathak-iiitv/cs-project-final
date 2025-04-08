@@ -276,7 +276,7 @@ main .content_box2 a {
   position: fixed;
   top: 120px;
   right: 20px;
-  width: 320px;
+  min-width: 320px;
   max-height: 80vh;
   overflow-y: auto;
   background: var(--grey-dark02);
@@ -289,18 +289,20 @@ main .content_box2 a {
 
 #cart-items {
   display: flex;
+
   flex-direction: column;
   gap: 12px;
   margin: 12px 0;
 }
 
 .cart-item {
+  gap: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--grey-dark01);
-  padding: 8px;
-  border-radius: 8px;
+  background: var(--grey-dark02);
+  /* padding: 8px; */
+  /* border-radius: 8px; */
 }
 
 .cart-item button {
@@ -314,4 +316,24 @@ main .content_box2 a {
 
 .cart-item button:hover {
   background: #cc0000;
+}
+
+.cost-butt {
+  display: flex;
+  gap: 24px;
+}
+
+
+.head {
+  padding-top: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  text-align: center;
+}
+
+.head-text {
+  font-size: var(--h1);
+  font-weight: var(--weight-h1);
 }

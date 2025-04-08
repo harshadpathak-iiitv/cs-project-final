@@ -37,7 +37,13 @@
         </li>
       </ul>
     </nav>
-    <main></main>
+
+    <main>
+      <div class="head">
+        <p class="head-text">Dine in with Us</p>
+        <p>A variety of Mouthwatering Dishes</p>
+      </div>
+    </main>
 
     <div id="data-container"></div>
 
@@ -46,6 +52,15 @@
       <div id="cart-items"></div>
       <button id="clear-cart-btn">Empty Cart</button>
       <p id="total">Total: ₹0</p>
+    </div>
+
+    <div id="sidebar">
+      <ul class="sidebar_ul">
+        <li class="side-items">Pizza</li>
+        <li class="side-items">Sides</li>
+        <li class="side-items">Desserts</li>
+        <li class="side-items">Drinks</li>
+      </ul>
     </div>
 
     <main class="container5">
@@ -89,7 +104,6 @@
       async function smth() {
         const container = document.getElementById("data-container");
 
-
         let { data: some, error } = await supabaseClient
           .from("some")
           .select("*");
@@ -103,11 +117,15 @@
             const itemDiv = document.createElement("div");
             itemDiv.className = "food-card";
             itemDiv.innerHTML = `
-              <img class="food_image" src="${item.Image || "https://via.placeholder.com/150"}" alt="${item.Name || "Food Item"}" />
+              <img class="food_image" src="${
+                item.Image || "https://via.placeholder.com/150"
+              }" alt="${item.Name || "Food Item"}" />
               <div class="food-info">
                 <div class="food-header">
                   <h3>${item.Name || "Untitled"}</h3>
-                  <img class="food_badge" src="Assets/Icons/${item.Category === "Non-Veg" ? "nonveg.svg" : "veg.svg"}" alt="${item.Category}">
+                  <img class="food_badge" src="Assets/Icons/${
+                    item.Category === "Non-Veg" ? "nonveg.svg" : "veg.svg"
+                  }" alt="${item.Category}">
                 </div>
                 <p>${item.Description || "No description available."}</p>
                 <div class="food-footer">
@@ -129,7 +147,6 @@
             });
             container.appendChild(itemDiv);
           });
-
         }
       }
 
@@ -145,14 +162,14 @@
       } catch (e) {
         console.warn("Corrupted cart data, resetting.");
       }
-    
+
       function saveCart() {
         localStorage.setItem("cart", JSON.stringify(cart));
         renderCart();
       }
-    
+
       function addToCart(item) {
-        const existing = cart.find(i => i.id === item.id);
+        const existing = cart.find((i) => i.id === item.id);
         if (existing) {
           existing.quantity += 1;
         } else {
@@ -160,59 +177,67 @@
         }
         saveCart();
       }
-    
+
       function updateQuantity(id, delta) {
-        const item = cart.find(i => i.id === id);
+        const item = cart.find((i) => i.id === id);
         if (!item) return;
         item.quantity += delta;
         if (item.quantity <= 0) {
-          cart = cart.filter(i => i.id !== id);
+          cart = cart.filter((i) => i.id !== id);
         }
         saveCart();
       }
-    
+
       function renderCart() {
         const container = document.getElementById("cart-items");
         const totalDisplay = document.getElementById("total");
         container.innerHTML = "";
-    
+
         let total = 0;
-    
+
         if (cart.length === 0) {
           container.innerHTML = "<p>Your cart is empty.</p>";
           totalDisplay.textContent = "Total: ₹0";
           return;
         }
-    
-        cart.forEach(item => {
+
+        cart.forEach((item) => {
           const itemDiv = document.createElement("div");
           itemDiv.className = "cart-item";
           itemDiv.innerHTML = `
             <span>${item.Name}</span>
+            <div class="cost-butt">
             <span>₹${item.Cost} × ${item.quantity}</span>
+            <div>
             <button onclick="updateQuantity(${item.id}, -1)">-</button>
             <button onclick="updateQuantity(${item.id}, 1)">+</button>
+            </div>
+            </div>
           `;
           total += item.Cost * item.quantity;
           container.appendChild(itemDiv);
         });
-    
+
         totalDisplay.textContent = `Total: ₹${total}`;
       }
-      document.getElementById("clear-cart-btn").addEventListener("click", function () {
-        localStorage.removeItem("cart"); 
-        cart = []; 
-        updateCartDisplay(); 
-      });
-      document.getElementById("clear-cart-btn").addEventListener("click", function () {
-        localStorage.removeItem("cart");
-        cart = [];
-        updateCartDisplay();
-      });
-      renderCart(); 
+      document
+        .getElementById("clear-cart-btn")
+        .addEventListener("click", function () {
+          localStorage.removeItem("cart");
+          cart = [];
+          updateCartDisplay();
+        });
+      document
+        .getElementById("clear-cart-btn")
+        .addEventListener("click", function () {
+          localStorage.removeItem("cart");
+          cart = [];
+          updateCartDisplay();
+        });
+      renderCart();
       function updateCartDisplay() {
         const cartItemsContainer = document.getElementById("cart-items");
-        cartItemsContainer.innerHTML = ""; 
+        cartItemsContainer.innerHTML = "";
 
         cart.forEach((item, index) => {
           const cartItem = document.createElement("div");
@@ -230,6 +255,5 @@
         cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
       }
     </script>
-    
   </body>
 </html>
