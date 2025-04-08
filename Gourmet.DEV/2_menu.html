@@ -11,6 +11,8 @@
       href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- <script src="2_menu.js"></script> -->
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -35,12 +37,19 @@
         </li>
       </ul>
     </nav>
-<main></main><main></main>
-    <main>
-    </main>
+    <main></main>
+
+    <div id="data-container"></div>
+
+    <div id="cart-container">
+      <h2>Your Cart</h2>
+      <div id="cart-items"></div>
+      <p id="total">Total: ₹0</p>
+    </div>
 
     <main class="container5">
       <hr />
+
       <div class="content_box2">
         <a>Contact Us</a>
 
@@ -68,5 +77,152 @@
         <p class="copyright">© 2024 Gourmet.DEV. All rights reserved.</p>
       </div>
     </main>
+
+    <script>
+      const { createClient } = supabase;
+      const supabaseClient = createClient(
+        "https://plgqdwybyppfpblwamzq.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsZ3Fkd3lieXBwZnBibHdhbXpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQxMTgxNDcsImV4cCI6MjA1OTY5NDE0N30.1zl610ycbBzaarhEZHn8HaLD9VWYqIrl1ScCPof41tA"
+      );
+
+      async function smth() {
+        const container = document.getElementById("data-container");
+
+        // document.body.appendChild(container);
+
+        let { data: some, error } = await supabaseClient
+          .from("some")
+          .select("*");
+
+        console.log(some);
+
+        if (error) {
+          console.error("Error:", error);
+        } else {
+          some.forEach((item) => {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "food-card";
+            itemDiv.innerHTML = `
+                    <img class="food_image" src="${
+                      item.Image || "https://via.placeholder.com/150"
+                    }" alt="${item.Name || "Food Item"}" />
+                    <div class="food-info">
+                      <div class="food-header">
+                        <h3>${item.Name || "Untitled"}</h3>
+                    <img class="food_badge" src="Assets/Icons/${
+                      item.Category === "Non-Veg" ? "nonveg.svg" : "veg.svg"
+                    }" alt="${item.Category}">
+
+                      </div>
+                      <p>${item.Description || "No description available."}</p>
+                      <div class="food-footer">
+                        <span class="price">₹${item.Cost || "00.00"}</span>
+                        <button class="add-to-cart">
+                          <img class="foodimage" src="Assets/Icons/plus-circle.svg" alt="plus" />
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  `;
+            container.appendChild(itemDiv);
+          });
+        }
+      }
+
+      smth();
+    </script>
+    <script>
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      function saveCart() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function addToCart(item) {
+        const exists = cart.find((i) => i.id === item.id);
+        if (exists) {
+          exists.quantity += 1;
+        } else {
+          cart.push({ ...item, quantity: 1 });
+        }
+        saveCart();
+      }
+
+      function removeFromCart(id) {
+        cart = cart.filter((item) => item.id !== id);
+        saveCart();
+      }
+
+      function renderCart() {
+        const container = document.getElementById("cart-items");
+        const total = document.getElementById("total");
+        container.innerHTML = "";
+        let totalAmount = 0;
+
+        cart.forEach((item) => {
+          const div = document.createElement("div");
+          div.className = "cart-item";
+          div.innerHTML = `
+        <span>${item.Name} x${item.quantity}</span>
+        <button onclick="removeFromCart(${item.id})">Remove</button>
+
+      `;
+          container.appendChild(div);
+          totalAmount += item.Cost * item.quantity;
+        });
+
+        total.innerText = `Total: ₹${totalAmount}`;
+      }
+
+      // Render cart on page load
+      renderCart();
+
+      // Modify existing smth() to hook into cart
+      async function smth() {
+        const container = document.getElementById("data-container");
+
+        let { data: some, error } = await supabaseClient
+          .from("some")
+          .select("*");
+
+        if (error) {
+          console.error("Error:", error);
+        } else {
+          some.forEach((item) => {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "food-card";
+            itemDiv.innerHTML = `
+          <img class="food_image" src="${
+            item.Image || "https://via.placeholder.com/150"
+          }" alt="${item.Name}" />
+          <div class="food-info">
+            <div class="food-header">
+              <h3>${item.Name}</h3>
+              <img class="food_badge" src="Assets/Icons/${
+                item.Category === "Non-Veg" ? "nonveg.svg" : "veg.svg"
+              }" alt="${item.Category}">
+            </div>
+            <p>${item.Description}</p>
+            <div class="food-footer">
+              <span class="price">₹${item.Cost}</span>
+              <button class="add-to-cart" onclick='addToCart(${JSON.stringify({
+                id: item.id,
+                Name: item.Name,
+                Cost: item.Cost,
+              })})'>
+                <img class="foodimage" src="Assets/Icons/plus-circle.svg" alt="plus" />
+                Add
+              </button>
+            </div>
+          </div>
+        `;
+            container.appendChild(itemDiv);
+          });
+        }
+      }
+
+      smth();
+    </script>
   </body>
 </html>
