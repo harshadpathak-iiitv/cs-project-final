@@ -315,3 +315,61 @@ main .content_box2 a {
 .cart-item button:hover {
   background: #cc0000;
 }
+
+#clear-cart-btn {
+  font-family: var(--body-font);
+  font-size: var(--b3);
+  font-weight: var(--weight-h1);
+
+  padding: 6px 12px;
+  background-color: transparent;
+  border: 2px solid var(--main-orange);
+  color: var(--main-orange);
+  border-radius: 10px;
+}
+
+
+#order-now-btn {
+
+  font-family: var(--body-font);
+  font-size: var(--b3);
+  font-weight: var(--weight-h1);
+
+  padding: 6px 12px;
+  background-color: var(--main-orange);
+  border: 2px solid var(--main-orang);
+  color: var(--grey-base01);
+  border-radius: 10px;
+}
+
+#order-now-btn:hover {
+ padding: 8px 16px;
+}
+
+#clear-cart-btn:hover{
+  padding: 8px 16px;
+}
+
+.sidebar{
+  position: fixed;
+  top: 120px;
+  right: 20px;
+ min-width: 320px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: var(--grey-dark02);
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  z-index: 10000;
+
+}
+
+.sidebar_ul{
+
+}
+
+.side-items{
+
+}
