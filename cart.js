@@ -1,84 +1,86 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || {};
-
-function addToCart(id, name, price) {
-    price = parseFloat(price);
-    const cartBtn = document.getElementById(id);
-    name = cartBtn.dataset.name
-    price = cartBtn.dataset.price
-    if (!cart[id]) 
-        cart[id] = { name, price, quantity: 1 }; 
-    else 
-        cart[id].quantity++;
-
-    localStorage.setItem("cart", JSON.stringify(cart)); 
-    updateCartUI(id, name, price); 
-    updateCartSummary(); 
-}
-
-function removeFromCart(id) {
-    if (cart[id] && cart[id].quantity > 0) {
-        cart[id].quantity--; 
-        if (cart[id].quantity === 0) 
-            delete cart[id]; 
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart)); 
-    updateCartUI(id); 
-    updateCartSummary(); 
-}
-
-function deleteFromCart(id) {
-    delete cart[id]; 
-    localStorage.setItem("cart", JSON.stringify(cart)); 
-    updateCartUI(id); 
-    updateCartSummary(); 
-}
-
-function updateCartSummary() {
-    let totalItems = 0;
-    let totalPrice = 0;
-
-    Object.values(cart).forEach(item => {
-        totalItems += item.quantity;
-        totalPrice += item.quantity * item.price;
+// Add product to cart by ID
+function addToCart(productId) {
+    fetch('add_to_cart.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: productId })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        console.log(`Added to cart: ${data.product.name}`);
+        loadCart(); // refresh the cart UI
+      } else {
+        console.error('Add failed:', data.message);
+      }
+    })
+    .catch(error => console.error('Fetch error:', error));
+  }
+  
+  // Load and display cart from backend
+  function loadCart() {
+    fetch('get_cart.php')
+      .then(response => response.json())
+      .then(cartItems => {
+        displayCart(cartItems);
+      })
+      .catch(error => console.error('Load cart error:', error));
+  }
+  
+  // Render cart items to the page
+  function displayCart(cartItems) {
+    const cartList = document.getElementById('cart-list');
+    const totalBox = document.getElementById('total');
+    cartList.innerHTML = '';
+    let total = 0;
+  
+    cartItems.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.name} x ${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`;
+  
+      const removeBtn = document.createElement('button');
+      removeBtn.textContent = 'Remove';
+      removeBtn.onclick = () => removeFromCart(item.product_id);
+  
+      li.appendChild(removeBtn);
+      cartList.appendChild(li);
+  
+      total += item.price * item.quantity;
     });
-
-    totalPrice = isNaN(totalPrice) ? 0 : totalPrice;
-
-    document.querySelector(".cart span").innerText = `${totalItems} items`;
-    document.querySelector(".cart .total").innerText = `$${totalPrice.toFixed(2)}`;
-}
-
-
-function updateCartUI(id, name = null, price = null) {
-    console.log(id)
-    const cartBtn = document.getElementById(id);
-
-    name = cartBtn.dataset.name
-    price = cartBtn.dataset.price
-    if (!cart[id] && name && price) 
-        cart[id] = { name, price, quantity: 0 };
-
-    if (cart[id]?.quantity > 0) {
-        cartBtn.innerHTML = `
-            <button onclick="removeFromCart(${id})">-</button>
-            <span>${cart[id].quantity}</span>
-            <button onclick="addToCart(${id}, '${cart[id].name}', ${cart[id].price})">+</button>
-            <button onclick="deleteFromCart(${id})"     ="delete-btn">🗑</button>
-        `;
-    } 
-    else {
-        cartBtn.innerHTML = `
-            <button class="add-to-cart" onclick="addToCart(${id}, '${name}', ${price})">
-                <img src="Assets/plus-circle.svg" alt="plus"> Add
-            </button>
-        `;
-    }
-}
-
-function loadCart() {
-    Object.keys(cart).forEach(id => updateCartUI(id, cart[id].name, cart[id].price));
-    updateCartSummary(); 
-}
-
-document.addEventListener("DOMContentLoaded", loadCart);
+  
+    totalBox.textContent = `Total: $${total.toFixed(2)}`;
+  }
+  
+  // Remove an item from the cart
+  function removeFromCart(productId) {
+    fetch('remove_item.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: productId })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Item removed:', data);
+      loadCart();
+    })
+    .catch(error => console.error('Remove error:', error));
+  }
+  
+  // Clear the entire cart
+  function clearCart() {
+    fetch('clear_cart.php', { method: 'POST' })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Cart cleared:', data);
+        loadCart();
+      })
+      .catch(error => console.error('Clear cart error:', error));
+  }
+  
+  // Load cart on page load
+  document.addEventListener('DOMContentLoaded', loadCart);
+  
