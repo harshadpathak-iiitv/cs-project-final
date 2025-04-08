@@ -44,25 +44,29 @@
       </div>
     </main>
 
-    <main class="inp">
+    <form action="https://api.web3forms.com/submit" method="POST" class="inp">
       </div>
+      <input type="hidden" name="access_key" value="dff60a8e-245c-4661-93c8-dacc58d2bafc">
       <div class="input-fields">
         <p class="input-text">Name</p>
-          <input id="106" class="input" type="text" placeholder="Name" required>
+          <input id="106" class="input" type="text" placeholder="Name" name="Name" required>
       </div>
       <div class="input-fields">
         <p class="input-text">Phone Number</p>
-          <input id="107" class="input" type="text" placeholder="1234567890" required>
+          <input id="107" class="input" type="text" name="Phone Number" placeholder="1234567890" required>
       </div>
       <div class="input-fields">
         <p class="input-text">Email</p>
-          <input id="108" class="input" type="email" placeholder="your_fav_GOURMET.DEV@dev.com" required>
+          <input id="108" class="input" type="email" name="Email" placeholder="your_fav_GOURMET.DEV@dev.com" required>
       </div>
       <div class="input-fields">
-        <p class="input-text">Your Messege</p>
-          <input id="109" class="input" type="email" placeholder="Convey your experience here" required>
+        <p class="input-text">Your Message</p>
+          <textarea id="109" class="input" type="textarea" name="Message from the User" placeholder="Convey your experience here" required></textarea>
       </div>
-    </main>
+      <div class="submit-btn">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
 
     <main class="container5">
       <hr />
