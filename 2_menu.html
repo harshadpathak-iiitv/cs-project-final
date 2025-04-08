@@ -50,7 +50,10 @@
     <div id="cart-container">
       <h2>Your Cart</h2>
       <div id="cart-items"></div>
-      <button id="clear-cart-btn">Empty Cart</button>
+      <div id="cart-actions" style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+        <button id="clear-cart-btn" onclick="clearCart()">Empty Cart</button>
+        <button id="order-now-btn">Order Now</button>
+      </div>
       <p id="total">Total: ₹0</p>
     </div>
 
@@ -187,7 +190,10 @@
         }
         saveCart();
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> cf6cd09227675ca45b8ba9daa701810f3a53eecb
       function renderCart() {
         const container = document.getElementById("cart-items");
         const totalDisplay = document.getElementById("total");
@@ -198,10 +204,15 @@
         if (cart.length === 0) {
           container.innerHTML = "<p>Your cart is empty.</p>";
           totalDisplay.textContent = "Total: ₹0";
+          toggleOrderNowBtn();
           return;
         }
 
+<<<<<<< HEAD
         cart.forEach((item) => {
+=======
+        cart.forEach(item => {
+>>>>>>> cf6cd09227675ca45b8ba9daa701810f3a53eecb
           const itemDiv = document.createElement("div");
           itemDiv.className = "cart-item";
           itemDiv.innerHTML = `
@@ -219,7 +230,9 @@
         });
 
         totalDisplay.textContent = `Total: ₹${total}`;
+        toggleOrderNowBtn();
       }
+<<<<<<< HEAD
       document
         .getElementById("clear-cart-btn")
         .addEventListener("click", function () {
@@ -235,6 +248,14 @@
           updateCartDisplay();
         });
       renderCart();
+=======
+      document.getElementById("clear-cart-btn").addEventListener("click", function () {
+        localStorage.removeItem("cart"); 
+        cart = []; 
+        updateCartDisplay(); 
+      });
+      renderCart(); 
+>>>>>>> cf6cd09227675ca45b8ba9daa701810f3a53eecb
       function updateCartDisplay() {
         const cartItemsContainer = document.getElementById("cart-items");
         cartItemsContainer.innerHTML = "";
@@ -250,9 +271,42 @@
 
           cartItemsContainer.appendChild(cartItem);
         });
+
+        updateCartTotal();
+      }
+      function updateCartTotal() {
+        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const totalElement = document.getElementById("total");
+        if (totalElement) {
+          totalElement.textContent = `Total: ₹${total}`;
+        }
+      }
+      function toggleOrderNowBtn() {
+        const orderNowBtn = document.getElementById("order-now-btn");
+        if (cart.length === 0) {
+          orderNowBtn.style.display = "none";
+        } else {
+          orderNowBtn.style.display = "inline-block";
+        }
       }
       if (cart.length === 0) {
         cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+      }
+      document.getElementById("order-now-btn").addEventListener("click", function () {
+        if (cart.length === 0) {
+          alert("Your cart is empty!");
+          return;
+        }
+
+        alert("Order placed successfully!");
+        localStorage.removeItem("cart");
+        cart = [];
+        updateCartDisplay();
+      });
+      function clearCart() {
+        cart = [];
+        localStorage.removeItem("cart");
+        renderCart();
       }
     </script>
   </body>
