@@ -103,126 +103,105 @@
             const itemDiv = document.createElement("div");
             itemDiv.className = "food-card";
             itemDiv.innerHTML = `
-                    <img class="food_image" src="${
-                      item.Image || "https://via.placeholder.com/150"
-                    }" alt="${item.Name || "Food Item"}" />
-                    <div class="food-info">
-                      <div class="food-header">
-                        <h3>${item.Name || "Untitled"}</h3>
-                    <img class="food_badge" src="Assets/Icons/${
-                      item.Category === "Non-Veg" ? "nonveg.svg" : "veg.svg"
-                    }" alt="${item.Category}">
-
-                      </div>
-                      <p>${item.Description || "No description available."}</p>
-                      <div class="food-footer">
-                        <span class="price">₹${item.Cost || "00.00"}</span>
-                        <button class="add-to-cart">
-                          <img class="foodimage" src="Assets/Icons/plus-circle.svg" alt="plus" />
-                          Add
-                        </button>
-                      </div>
-                    </div>
-                  `;
+              <img class="food_image" src="${item.Image || "https://via.placeholder.com/150"}" alt="${item.Name || "Food Item"}" />
+              <div class="food-info">
+                <div class="food-header">
+                  <h3>${item.Name || "Untitled"}</h3>
+                  <img class="food_badge" src="Assets/Icons/${item.Category === "Non-Veg" ? "nonveg.svg" : "veg.svg"}" alt="${item.Category}">
+                </div>
+                <p>${item.Description || "No description available."}</p>
+                <div class="food-footer">
+                  <span class="price">₹${item.Cost || "00.00"}</span>
+                  <button class="add-to-cart">
+                    <img class="foodimage" src="Assets/Icons/plus-circle.svg" alt="plus" />
+                    Add
+                  </button>
+                </div>
+              </div>
+            `;
+            const addButton = itemDiv.querySelector(".add-to-cart");
+            addButton.addEventListener("click", () => {
+              addToCart({
+                id: item.id,
+                Name: item.Name,
+                Cost: item.Cost,
+              });
+            });
             container.appendChild(itemDiv);
           });
+
         }
       }
 
       smth();
     </script>
     <script>
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
+      let cart = [];
+      try {
+        const stored = JSON.parse(localStorage.getItem("cart"));
+        if (Array.isArray(stored)) {
+          cart = stored;
+        }
+      } catch (e) {
+        console.warn("Corrupted cart data, resetting.");
+      }
+    
       function saveCart() {
         localStorage.setItem("cart", JSON.stringify(cart));
         renderCart();
       }
-
+    
       function addToCart(item) {
-        const exists = cart.find((i) => i.id === item.id);
-        if (exists) {
-          exists.quantity += 1;
+        const existing = cart.find(i => i.id === item.id);
+        if (existing) {
+          existing.quantity += 1;
         } else {
           cart.push({ ...item, quantity: 1 });
         }
         saveCart();
       }
-
-      function removeFromCart(id) {
-        cart = cart.filter((item) => item.id !== id);
+    
+      function updateQuantity(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if (!item) return;
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+          cart = cart.filter(i => i.id !== id);
+        }
         saveCart();
       }
-
+    
       function renderCart() {
         const container = document.getElementById("cart-items");
-        const total = document.getElementById("total");
+        const totalDisplay = document.getElementById("total");
         container.innerHTML = "";
-        let totalAmount = 0;
-
-        cart.forEach((item) => {
-          const div = document.createElement("div");
-          div.className = "cart-item";
-          div.innerHTML = `
-        <span>${item.Name} x${item.quantity}</span>
-        <button onclick="removeFromCart(${item.id})">Remove</button>
-
-      `;
-          container.appendChild(div);
-          totalAmount += item.Cost * item.quantity;
-        });
-
-        total.innerText = `Total: ₹${totalAmount}`;
-      }
-
-      // Render cart on page load
-      renderCart();
-
-      // Modify existing smth() to hook into cart
-      async function smth() {
-        const container = document.getElementById("data-container");
-
-        let { data: some, error } = await supabaseClient
-          .from("some")
-          .select("*");
-
-        if (error) {
-          console.error("Error:", error);
-        } else {
-          some.forEach((item) => {
-            const itemDiv = document.createElement("div");
-            itemDiv.className = "food-card";
-            itemDiv.innerHTML = `
-          <img class="food_image" src="${
-            item.Image || "https://via.placeholder.com/150"
-          }" alt="${item.Name}" />
-          <div class="food-info">
-            <div class="food-header">
-              <h3>${item.Name}</h3>
-              <img class="food_badge" src="Assets/Icons/${
-                item.Category === "Non-Veg" ? "nonveg.svg" : "veg.svg"
-              }" alt="${item.Category}">
-            </div>
-            <p>${item.Description}</p>
-            <div class="food-footer">
-              <span class="price">₹${item.Cost}</span>
-              <button class="add-to-cart" onclick='addToCart(${JSON.stringify({
-                id: item.id,
-                Name: item.Name,
-                Cost: item.Cost,
-              })})'>
-                <img class="foodimage" src="Assets/Icons/plus-circle.svg" alt="plus" />
-                Add
-              </button>
-            </div>
-          </div>
-        `;
-            container.appendChild(itemDiv);
-          });
+    
+        let total = 0;
+    
+        if (cart.length === 0) {
+          container.innerHTML = "<p>Your cart is empty.</p>";
+          totalDisplay.textContent = "Total: ₹0";
+          return;
         }
+    
+        cart.forEach(item => {
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "cart-item";
+          itemDiv.innerHTML = `
+            <span>${item.Name}</span>
+            <span>₹${item.Cost} × ${item.quantity}</span>
+            <button onclick="updateQuantity(${item.id}, -1)">-</button>
+            <button onclick="updateQuantity(${item.id}, 1)">+</button>
+          `;
+          total += item.Cost * item.quantity;
+          container.appendChild(itemDiv);
+        });
+    
+        totalDisplay.textContent = `Total: ₹${total}`;
       }
-
-      smth();
+    
+      renderCart(); // Load cart on page load
     </script>
+    
   </body>
 </html>
