@@ -60,7 +60,6 @@
           margin-bottom: 12px;
         "
       >
-
         <button id="clear-cart-btn" onclick="clearCart()">Empty Cart</button>
         <button id="order-now-btn">Order Now</button>
       </div>
@@ -115,7 +114,8 @@
             // Try from 'pizzas' table
             let { data: pizzas, error: pizzasError } = await supabaseClient
               .from("pizzas")
-              .select("*");
+              .select("*")
+              .eq("Course", "1");
 
             // If successful and data exists, use it
             if (!pizzasError && pizzas && pizzas.length > 0) {

@@ -107,29 +107,38 @@
       async function smth() {
         const container = document.getElementById("data-container");
         try {
-          console.log("Fetching sides data...");
+          console.log("Fetching pizza data...");
 
           // First try with Supabase
           try {
+            // Try from 'pizzas' table
+            let { data: pizzas, error: pizzasError } = await supabaseClient
+              .from("pizzas")
+              .select("*")
+              .eq("Course", "2");
+
+            // If successful and data exists, use it
+            if (!pizzasError && pizzas && pizzas.length > 0) {
+              return displayPizzas(pizzas);
+            }
+
             // Try from 'some' table
             let { data: someData, error: someError } = await supabaseClient
               .from("some")
               .select("*");
 
-            // If successful and data exists, use it
             if (!someError && someData && someData.length > 0) {
-              // Display the data
-              return displaySides(someData);
-            }
+              // Check if there's a type field to filter by
+              const hasTypeField = someData[0] && "type" in someData[0];
 
-            // Try from dedicated 'sides' table
-            let { data: sides, error: sidesError } = await supabaseClient
-              .from("sides")
-              .select("*");
+              if (hasTypeField) {
+                // Filter for pizza type
+                someData = someData.filter((item) => item.type === "pizza");
+              }
 
-            if (!sidesError && sides && sides.length > 0) {
-              // Display the data
-              return displaySides(sides);
+              if (someData.length > 0) {
+                return displayPizzas(someData);
+              }
             }
 
             // If we get here, both failed, use fallback data
@@ -138,8 +147,8 @@
             console.error("Database error:", dbError);
           }
 
-          // Fallback: Create some default sides data
-          const fallbackSides = [
+          // Fallback: Create some default pizza data
+          const fallbackPizzas = [
             {
               id: "side2",
               Name: "French Fries",
@@ -171,18 +180,19 @@
           ];
 
           // Display the fallback data
-          displaySides(fallbackSides);
+          displayPizzas(fallbackPizzas);
         } catch (e) {
           console.error("Error in smth function:", e);
-          container.innerHTML = "<p>An error occurred while loading sides.</p>";
+          container.innerHTML =
+            "<p>An error occurred while loading pizzas.</p>";
         }
       }
 
-      // Helper function to display sides
-      function displaySides(items) {
+      // Helper function to display pizzas
+      function displayPizzas(items) {
         const container = document.getElementById("data-container");
         if (!items || items.length === 0) {
-          container.innerHTML = "<p>No sides available at the moment.</p>";
+          container.innerHTML = "<p>No pizzas available at the moment.</p>";
           return;
         }
 
@@ -277,7 +287,7 @@
           const itemDiv = document.createElement("div");
           itemDiv.className = "cart-item";
           itemDiv.innerHTML = `
-            <span>${item.Name}</span>            
+            <span>${item.Name}</span>
             <div class="cart-seg">
             <span>₹${item.Cost} × ${item.quantity}</span>
             <button onclick="updateQuantity(${item.id}, -1)">-</button>
