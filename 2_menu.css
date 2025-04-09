@@ -170,13 +170,11 @@ main .content_box2 a {
   display: flex;
 }
 
-
-
 /* ajkscjkadsbnkjdfn */
 
 #data-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;   
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
   justify-content: center;
   padding: 2rem;
@@ -221,7 +219,7 @@ main .content_box2 a {
 
 .food-header h3 {
   font-size: 20px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
 }
 
@@ -250,7 +248,7 @@ main .content_box2 a {
   border: none;
   border-radius: 8px;
   padding: 6px 12px;
-  cursor: pointer;  
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -269,21 +267,20 @@ main .content_box2 a {
   height: 20px;
 }
 
-
 /* CART */
 
 #cart-container {
   position: fixed;
-  top: 120px;
+  bottom: 20px;
   right: 20px;
-  min-width: 320px;
+  min-width: 200px;
   max-height: 80vh;
   overflow-y: auto;
   background: var(--grey-dark02);
   color: white;
   padding: 16px;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   z-index: 10000;
 }
 
@@ -323,7 +320,6 @@ main .content_box2 a {
   gap: 24px;
 }
 
-
 .head {
   padding-top: 300px;
   display: flex;
@@ -336,4 +332,72 @@ main .content_box2 a {
 .head-text {
   font-size: var(--h1);
   font-weight: var(--weight-h1);
+}
+
+#clear-cart-btn {
+  font-family: var(--body-font);
+  font-size: var(--b3);
+  font-weight: var(--weight-h1);
+
+  padding: 6px 12px;
+  background-color: transparent;
+  border: 2px solid var(--main-orange);
+  color: var(--main-orange);
+  border-radius: 10px;
+}
+
+#order-now-btn {
+  font-family: var(--body-font);
+  font-size: var(--b3);
+  font-weight: var(--weight-h1);
+
+  padding: 6px 12px;
+  background-color: var(--main-orange);
+  border: 2px solid var(--main-orang);
+  color: var(--grey-base01);
+  border-radius: 10px;
+}
+
+#order-now-btn:hover {
+  padding: 8px 16px;
+}
+
+#clear-cart-btn:hover {
+  padding: 8px 16px;
+}
+
+#sidebar {
+  position: fixed;
+  top: 40%  ;
+  left: 20px;
+  min-width: 150px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: var(--grey-dark02);
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  z-index: 10000;
+}
+
+.sidebar_ul {
+  
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px  ;
+
+}
+
+.side-items a {
+  transition: all 0.3s ease;
+  color: var(--grey-base03);
+  text-decoration: none;
+}
+
+.side-items a:hover {
+  font-size: var(--b1);
+  font-weight: var(--weight-h3);
+  color: var(--grey-base01);
 }
