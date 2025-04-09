@@ -107,37 +107,29 @@
       async function smth() {
         const container = document.getElementById("data-container");
         try {
-          console.log("Fetching pizza data...");
+          console.log("Fetching desserts data...");
 
           // First try with Supabase
           try {
-            // Try from 'pizzas' table
-            let { data: pizzas, error: pizzasError } = await supabaseClient
-              .from("pizzas")
-              .select("*");
-
-            // If successful and data exists, use it
-            if (!pizzasError && pizzas && pizzas.length > 0) {
-              return displayPizzas(pizzas);
-            }
-
             // Try from 'some' table
             let { data: someData, error: someError } = await supabaseClient
               .from("some")
               .select("*");
 
+            // If successful and data exists, use it
             if (!someError && someData && someData.length > 0) {
-              // Check if there's a type field to filter by
-              const hasTypeField = someData[0] && "type" in someData[0];
+              // Display the data
+              return displayDesserts(someData);
+            }
 
-              if (hasTypeField) {
-                // Filter for pizza type
-                someData = someData.filter((item) => item.type === "pizza");
-              }
+            // Try from dedicated 'desserts' table
+            let { data: desserts, error: dessertsError } = await supabaseClient
+              .from("desserts")
+              .select("*");
 
-              if (someData.length > 0) {
-                return displayPizzas(someData);
-              }
+            if (!dessertsError && desserts && desserts.length > 0) {
+              // Display the data
+              return displayDesserts(desserts);
             }
 
             // If we get here, both failed, use fallback data
@@ -146,63 +138,64 @@
             console.error("Database error:", dbError);
           }
 
-          // Fallback: Create some default pizza data
-          const fallbackPizzas = [
+          // Fallback: Create some default desserts data
+          const fallbackDesserts = [
             {
-              id: "pizza1",
-              Name: "Margherita",
+              id: "dessert1",
+              Name: "Chocolate Brownie",
               Description:
-                "Classic pizza with tomato sauce, mozzarella, and fresh basil",
+                "Rich chocolate brownie served with vanilla ice cream",
               Image:
-                "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2670&auto=format&fit=crop",
-              Cost: 299,
+                "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=2787&auto=format&fit=crop",
+              Cost: 149,
               Category: "Veg",
             },
             {
-              id: "pizza2",
-              Name: "Pepperoni",
-              Description: "Pepperoni, mozzarella, and tomato sauce",
-              Image:
-                "https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=2680&auto=format&fit=crop",
-              Cost: 399,
-              Category: "Non-Veg",
-            },
-            {
-              id: "pizza3",
-              Name: "Vegetarian Supreme",
+              id: "dessert2",
+              Name: "Cheesecake",
               Description:
-                "Bell peppers, onions, mushrooms, black olives, and mozzarella",
+                "Creamy New York style cheesecake with berry compote",
               Image:
-                "https://images.unsplash.com/photo-1593246049226-ded77bf90326?q=80&w=2235&auto=format&fit=crop",
-              Cost: 349,
+                "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=2730&auto=format&fit=crop",
+              Cost: 199,
               Category: "Veg",
             },
             {
-              id: "pizza4",
-              Name: "BBQ Chicken",
+              id: "dessert3",
+              Name: "Tiramisu",
               Description:
-                "Grilled chicken, BBQ sauce, red onions, and cilantro",
+                "Classic Italian dessert with coffee-soaked ladyfingers and mascarpone cream",
               Image:
-                "https://images.unsplash.com/photo-1595708684082-a173bb3a06c5?q=80&w=2787&auto=format&fit=crop",
-              Cost: 449,
-              Category: "Non-Veg",
+                "https://images.unsplash.com/photo-1571877227793-a52c89eb17d8?q=80&w=2835&auto=format&fit=crop",
+              Cost: 249,
+              Category: "Veg",
+            },
+            {
+              id: "dessert4",
+              Name: "Apple Pie",
+              Description:
+                "Warm apple pie served with a scoop of vanilla ice cream",
+              Image:
+                "https://images.unsplash.com/photo-1574085733277-851d9d856a3a?q=80&w=2776&auto=format&fit=crop",
+              Cost: 179,
+              Category: "Veg",
             },
           ];
 
           // Display the fallback data
-          displayPizzas(fallbackPizzas);
+          displayDesserts(fallbackDesserts);
         } catch (e) {
           console.error("Error in smth function:", e);
           container.innerHTML =
-            "<p>An error occurred while loading pizzas.</p>";
+            "<p>An error occurred while loading desserts.</p>";
         }
       }
 
-      // Helper function to display pizzas
-      function displayPizzas(items) {
+      // Helper function to display desserts
+      function displayDesserts(items) {
         const container = document.getElementById("data-container");
         if (!items || items.length === 0) {
-          container.innerHTML = "<p>No pizzas available at the moment.</p>";
+          container.innerHTML = "<p>No desserts available at the moment.</p>";
           return;
         }
 

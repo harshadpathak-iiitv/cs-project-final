@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supabase Table Checker</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      pre {
+        background-color: #f5f5f5;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      h1 {
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Supabase Table Checker</h1>
+    <div id="output"></div>
+
+    <script>
+      const outputEl = document.getElementById("output");
+
+      async function checkTables() {
+        try {
+          outputEl.innerHTML = "<p>Connecting to Supabase...</p>";
+
+          const { createClient } = supabase;
+          const supabaseClient = createClient(
+            "https://plgqdwybyppfpblwamzq.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsZ3Fkd3lieXBwZnBibHdhbXpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQxMTgxNDcsImV4cCI6MjA1OTY5NDE0N30.1zl610ycbBzaarhEZHn8HaLD9VWYqIrl1ScCPof41tA"
+          );
+
+          // Try a direct query to check if get_tables RPC exists
+          try {
+            const { data: tables, error: tablesError } =
+              await supabaseClient.rpc("get_tables");
+
+            if (!tablesError) {
+              outputEl.innerHTML = `<h2>Available Tables:</h2><pre>${JSON.stringify(
+                tables,
+                null,
+                2
+              )}</pre>`;
+            }
+          } catch (e) {
+            console.log("RPC method not available", e);
+          }
+
+          // Check for specific tables
+          outputEl.innerHTML += `<h2>Checking known tables:</h2>`;
+
+          const knownTables = [
+            "pizzas",
+            "sides",
+            "desserts",
+            "drinks",
+            "some",
+            "products",
+          ];
+          const tableDetails = [];
+
+          for (const table of knownTables) {
+            try {
+              // Check if table exists by trying to query it
+              const { data, error } = await supabaseClient
+                .from(table)
+                .select("count");
+
+              if (!error) {
+                // Table exists, get its schema
+                const { data: columns, error: columnsError } =
+                  await supabaseClient
+                    .from("information_schema.columns")
+                    .select("column_name")
+                    .eq("table_name", table);
+
+                const columnNames = columnsError
+                  ? []
+                  : columns.map((c) => c.column_name);
+
+                // Get a sample row
+                const { data: sample, error: sampleError } =
+                  await supabaseClient.from(table).select("*").limit(1);
+
+                tableDetails.push({
+                  table,
+                  exists: true,
+                  columns: columnNames,
+                  sample: sampleError ? null : sample,
+                });
+
+                // Count items by type if the table has a type column
+                if (columnNames.includes("type")) {
+                  const { data: typeData, error: typeError } =
+                    await supabaseClient
+                      .from(table)
+                      .select("type, count")
+                      .group("type");
+
+                  if (!typeError && typeData) {
+                    tableDetails[tableDetails.length - 1].typeCount = typeData;
+                  }
+                }
+              } else {
+                tableDetails.push({
+                  table,
+                  exists: false,
+                  error: error.message,
+                });
+              }
+            } catch (e) {
+              tableDetails.push({ table, exists: false, error: e.message });
+            }
+          }
+
+          outputEl.innerHTML += `<pre>${JSON.stringify(
+            tableDetails,
+            null,
+            2
+          )}</pre>`;
+
+          // Also try to list all tables from pg_tables
+          try {
+            const { data: pgTables, error: pgError } = await supabaseClient
+              .from("information_schema.tables")
+              .select("table_name")
+              .eq("table_schema", "public");
+
+            if (!pgError) {
+              outputEl.innerHTML += `<h2>All Tables in Database:</h2><pre>${JSON.stringify(
+                pgTables,
+                null,
+                2
+              )}</pre>`;
+            }
+          } catch (e) {
+            console.log("Could not query pg_tables", e);
+          }
+        } catch (e) {
+          outputEl.innerHTML = `<p>Error: ${e.message}</p>`;
+          console.error(e);
+        }
+      }
+
+      checkTables();
+    </script>
+  </body>
+</html>

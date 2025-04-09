@@ -203,7 +203,7 @@ main .content_box2 a {
   border: none;
 }
 
-.input{
+.input {
   height: 50px;
   width: 548px;
   align-self: center;
@@ -211,28 +211,25 @@ main .content_box2 a {
   justify-content: center;
   border: none;
   text-align: center;
-  color: var(--grey-base01);
+  color: var(--grey-dark01);
   font-family: var(--head2-font);
   font-size: var(--b2);
-  background: var(--main-orange);
+  background: var(--grey-base01);
   padding: 0 30px;
   border-radius: 10px;
 
   /* appearance: none; */
-
 }
 
-input[type="date"]{
+input[type="date"] {
   color: var(--grey-dark02);
-  font-size: var(--b3 );
+  font-size: var(--b3);
 }
 
-input::placeholder{
-  font-size: var(--b3 );
+input::placeholder {
+  font-size: var(--b3);
   color: var(--grey-dark02);
 }
-
-
 
 .inp {
   display: flex;
@@ -243,9 +240,32 @@ input::placeholder{
   border: none;
 }
 
-
-.input:active{
+.input:active {
   border: none;
   outline: none;
 }
 
+.submit-btn button {
+  text-decoration: none;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
+  font-family: "Josefin Sans";
+  font-weight: 700;
+  gap: 16px;
+  display: flex;
+  flex: 1 1 0;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: var(--grey-base01);
+  background-color: var(--main-bllue02);
+  border-radius: 10px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.submit-btn butt:hover {
+  background-color: var(--main-blue01);
+  padding: 16px 72px;
+}

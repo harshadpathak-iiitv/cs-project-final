@@ -107,37 +107,29 @@
       async function smth() {
         const container = document.getElementById("data-container");
         try {
-          console.log("Fetching pizza data...");
+          console.log("Fetching sides data...");
 
           // First try with Supabase
           try {
-            // Try from 'pizzas' table
-            let { data: pizzas, error: pizzasError } = await supabaseClient
-              .from("pizzas")
-              .select("*");
-
-            // If successful and data exists, use it
-            if (!pizzasError && pizzas && pizzas.length > 0) {
-              return displayPizzas(pizzas);
-            }
-
             // Try from 'some' table
             let { data: someData, error: someError } = await supabaseClient
               .from("some")
               .select("*");
 
+            // If successful and data exists, use it
             if (!someError && someData && someData.length > 0) {
-              // Check if there's a type field to filter by
-              const hasTypeField = someData[0] && "type" in someData[0];
+              // Display the data
+              return displaySides(someData);
+            }
 
-              if (hasTypeField) {
-                // Filter for pizza type
-                someData = someData.filter((item) => item.type === "pizza");
-              }
+            // Try from dedicated 'sides' table
+            let { data: sides, error: sidesError } = await supabaseClient
+              .from("sides")
+              .select("*");
 
-              if (someData.length > 0) {
-                return displayPizzas(someData);
-              }
+            if (!sidesError && sides && sides.length > 0) {
+              // Display the data
+              return displaySides(sides);
             }
 
             // If we get here, both failed, use fallback data
@@ -146,63 +138,61 @@
             console.error("Database error:", dbError);
           }
 
-          // Fallback: Create some default pizza data
-          const fallbackPizzas = [
+          // Fallback: Create some default sides data
+          const fallbackSides = [
             {
-              id: "pizza1",
-              Name: "Margherita",
+              id: "side1",
+              Name: "Garlic Bread",
               Description:
-                "Classic pizza with tomato sauce, mozzarella, and fresh basil",
+                "Freshly baked bread topped with garlic butter and herbs",
               Image:
-                "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2670&auto=format&fit=crop",
-              Cost: 299,
+                "https://images.unsplash.com/photo-1619535860434-ea5c1ade1e2d?q=80&w=2787&auto=format&fit=crop",
+              Cost: 99,
               Category: "Veg",
             },
             {
-              id: "pizza2",
-              Name: "Pepperoni",
-              Description: "Pepperoni, mozzarella, and tomato sauce",
+              id: "side2",
+              Name: "French Fries",
+              Description: "Crispy golden fries served with ketchup",
               Image:
-                "https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=2680&auto=format&fit=crop",
-              Cost: 399,
-              Category: "Non-Veg",
-            },
-            {
-              id: "pizza3",
-              Name: "Vegetarian Supreme",
-              Description:
-                "Bell peppers, onions, mushrooms, black olives, and mozzarella",
-              Image:
-                "https://images.unsplash.com/photo-1593246049226-ded77bf90326?q=80&w=2235&auto=format&fit=crop",
-              Cost: 349,
+                "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?q=80&w=2825&auto=format&fit=crop",
+              Cost: 149,
               Category: "Veg",
             },
             {
-              id: "pizza4",
-              Name: "BBQ Chicken",
-              Description:
-                "Grilled chicken, BBQ sauce, red onions, and cilantro",
+              id: "side3",
+              Name: "Chicken Wings",
+              Description: "Spicy chicken wings served with blue cheese dip",
               Image:
-                "https://images.unsplash.com/photo-1595708684082-a173bb3a06c5?q=80&w=2787&auto=format&fit=crop",
-              Cost: 449,
+                "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?q=80&w=2780&auto=format&fit=crop",
+              Cost: 249,
               Category: "Non-Veg",
+            },
+            {
+              id: "side4",
+              Name: "Mozzarella Sticks",
+              Description:
+                "Breaded and fried mozzarella sticks served with marinara sauce",
+              Image:
+                "https://images.unsplash.com/photo-1548340748-6d2b7d7da280?q=80&w=2787&auto=format&fit=crop",
+              Cost: 199,
+              Category: "Veg",
             },
           ];
 
           // Display the fallback data
-          displayPizzas(fallbackPizzas);
+          displaySides(fallbackSides);
         } catch (e) {
           console.error("Error in smth function:", e);
-          container.innerHTML =
-            "<p>An error occurred while loading pizzas.</p>";
+          container.innerHTML = "<p>An error occurred while loading sides.</p>";
         }
       }
 
-      // Helper function to display pizzas
-      function displayPizzas(items) {
+      // Helper function to display sides
+      function displaySides(items) {
         const container = document.getElementById("data-container");
         if (!items || items.length === 0) {
-          container.innerHTML = "<p>No pizzas available at the moment.</p>";
+          container.innerHTML = "<p>No sides available at the moment.</p>";
           return;
         }
 
