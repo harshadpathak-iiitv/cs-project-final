@@ -60,6 +60,7 @@
           margin-bottom: 12px;
         "
       >
+
         <button id="clear-cart-btn" onclick="clearCart()">Empty Cart</button>
         <button id="order-now-btn">Order Now</button>
       </div>
@@ -298,9 +299,11 @@
           itemDiv.className = "cart-item";
           itemDiv.innerHTML = `
             <span>${item.Name}</span>
+            <div class="cart-seg">
             <span>₹${item.Cost} × ${item.quantity}</span>
             <button onclick="updateQuantity(${item.id}, -1)">-</button>
             <button onclick="updateQuantity(${item.id}, 1)">+</button>
+            </div>
           `;
           total += item.Cost * item.quantity;
           container.appendChild(itemDiv);

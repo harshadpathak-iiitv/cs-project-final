@@ -391,7 +391,7 @@ main .content_box2 a {
 }
 
 .side-items a {
-  transition: all 0.3s ease;
+  transition: all 0.2s linear;
   color: var(--grey-base03);
   text-decoration: none;
 }
@@ -400,4 +400,10 @@ main .content_box2 a {
   font-size: var(--b1);
   font-weight: var(--weight-h3);
   color: var(--grey-base01);
+}
+
+.cart-seg{
+  display: flex;
+  gap: 20px;
+  
 }

@@ -141,16 +141,6 @@
           // Fallback: Create some default sides data
           const fallbackSides = [
             {
-              id: "side1",
-              Name: "Garlic Bread",
-              Description:
-                "Freshly baked bread topped with garlic butter and herbs",
-              Image:
-                "https://images.unsplash.com/photo-1619535860434-ea5c1ade1e2d?q=80&w=2787&auto=format&fit=crop",
-              Cost: 99,
-              Category: "Veg",
-            },
-            {
               id: "side2",
               Name: "French Fries",
               Description: "Crispy golden fries served with ketchup",
@@ -287,10 +277,12 @@
           const itemDiv = document.createElement("div");
           itemDiv.className = "cart-item";
           itemDiv.innerHTML = `
-            <span>${item.Name}</span>
+            <span>${item.Name}</span>            
+            <div class="cart-seg">
             <span>₹${item.Cost} × ${item.quantity}</span>
             <button onclick="updateQuantity(${item.id}, -1)">-</button>
             <button onclick="updateQuantity(${item.id}, 1)">+</button>
+            </div>
           `;
           total += item.Cost * item.quantity;
           container.appendChild(itemDiv);

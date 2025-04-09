@@ -144,7 +144,7 @@
               Name: "Cold Coffee",
               Description: "Smooth cold coffee with ice cream",
               Image:
-                "https://images.unsplash.com/photo-1566657040467-82679c7a7e7a?q=80&w=2780&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1577805947697-89e18249d767?q=80&w=2898&auto=format&fit=crop",
               Cost: 119,
               Category: "Veg",
             },
@@ -164,15 +164,6 @@
               Image:
                 "https://images.unsplash.com/photo-1577805947697-89e18249d767?q=80&w=2898&auto=format&fit=crop",
               Cost: 149,
-              Category: "Veg",
-            },
-            {
-              id: "drink4",
-              Name: "Mango Smoothie",
-              Description: "Thick smoothie made with ripe mangoes and yogurt",
-              Image:
-                "https://images.unsplash.com/photo-1622597467836-f3e6707e1696?q=80&w=2942&auto=format&fit=crop",
-              Cost: 129,
               Category: "Veg",
             },
           ];
@@ -286,9 +277,11 @@
           itemDiv.className = "cart-item";
           itemDiv.innerHTML = `
             <span>${item.Name}</span>
+            <div class="cart-seg">
             <span>₹${item.Cost} × ${item.quantity}</span>
             <button onclick="updateQuantity(${item.id}, -1)">-</button>
             <button onclick="updateQuantity(${item.id}, 1)">+</button>
+            </div>
           `;
           total += item.Cost * item.quantity;
           container.appendChild(itemDiv);
