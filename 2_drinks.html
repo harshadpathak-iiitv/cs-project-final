@@ -113,7 +113,8 @@
             // Try from 'some' table
             let { data: someData, error: someError } = await supabaseClient
               .from("some")
-              .select("*");
+              .select("*")
+              .eq("Course", "4");
 
             // If successful and data exists, use it
             if (!someError && someData && someData.length > 0) {

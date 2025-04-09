@@ -311,3 +311,19 @@ main .content_box2 a {
   gap: 8px;
   display: flex;
 }
+
+.teams {
+  display: flex;
+  gap: 32px;
+  padding: 48px;
+  background-color: var(--grey-dark02);
+  border-radius: 45px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--grey-dark01);
+  padding: 32px;
+  border-radius: 30px;
+}
